@@ -1,0 +1,35 @@
+name: taggeamento
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: loja
+      POSTGRES_PASSWORD: loja123
+      POSTGRES_DB: loja
+    volumes:
+      - dados_banco:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U loja -d loja"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  app:
+    image: python:3.12-slim
+    working_dir: /app/backend
+    environment:
+      DATABASE_URL: postgresql+psycopg2://loja:loja123@db:5432/loja
+      PYTHONDONTWRITEBYTECODE: "1"
+    volumes:
+      - ./backend:/app/backend
+      - ./frontend:/app/frontend
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: sh -c "pip install --quiet --no-cache-dir fastapi==0.115.0 uvicorn==0.30.6 sqlalchemy==2.0.35 psycopg2-binary==2.9.9 && uvicorn app:app --host 0.0.0.0 --port 8000"
+
+volumes:
+  dados_banco:

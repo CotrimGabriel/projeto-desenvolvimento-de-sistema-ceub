@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Tag</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topo">
+        <h1>Loja Tag</h1>
+        <p>A vitrine se organiza conforme os seus cliques.</p>
+    </header>
+
+    <div class="pagina">
+        <main>
+            <section class="painel" aria-labelledby="titulo-prioridades">
+                <div class="painel-cabecalho">
+                    <h2 id="titulo-prioridades">Sua lista de prioridades</h2>
+                    <button id="limpar-tags" class="botao-secundario" type="button">Limpar minhas tags</button>
+                </div>
+                <ol id="lista-prioridades" class="prioridades"></ol>
+            </section>
+
+            <section aria-label="Produtos">
+                <div id="vitrine" class="vitrine"></div>
+            </section>
+        </main>
+
+        <aside class="carrinho" aria-labelledby="titulo-carrinho">
+            <h2 id="titulo-carrinho">Carrinho (<span id="quantidade-carrinho">0</span>)</h2>
+            <ul id="itens-carrinho" class="itens-carrinho"></ul>
+            <div class="total-carrinho">
+                <span>Total</span>
+                <strong id="total-carrinho">R$ 0,00</strong>
+            </div>
+        </aside>
+    </div>
+
+    <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

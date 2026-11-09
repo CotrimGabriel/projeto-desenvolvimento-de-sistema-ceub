@@ -1,0 +1,277 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f4f1ea;
+    color: #23302d;
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.4;
+}
+
+button {
+    cursor: pointer;
+    font: inherit;
+}
+
+.topo {
+    background: #17453f;
+    color: #ffffff;
+    padding: 24px 32px;
+}
+
+.topo h1 {
+    font-size: 28px;
+}
+
+.pagina {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 24px;
+}
+
+.painel,
+.carrinho,
+.card {
+    background: #ffffff;
+    border: 1px solid #ddd6c8;
+    border-radius: 8px;
+}
+
+.painel {
+    margin-bottom: 24px;
+    padding: 16px;
+}
+
+.painel-cabecalho {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+.prioridades {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    min-height: 32px;
+}
+
+.prioridades li {
+    border-radius: 16px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 14px;
+}
+
+.prioridades .vazio {
+    background: none;
+    color: #66716e;
+    font-weight: 400;
+    padding: 6px 0;
+}
+
+.categoria-1 {
+    background: #2b6cb0;
+}
+
+.categoria-2 {
+    background: #b8326b;
+}
+
+.categoria-3 {
+    background: #2f7d4f;
+}
+
+.vitrine {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+}
+
+.card {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    position: relative;
+}
+
+.card:hover,
+.card:focus-visible {
+    border-color: #17453f;
+    box-shadow: 0 4px 12px rgba(23, 69, 63, 0.18);
+    outline: none;
+}
+
+.card.movendo {
+    transition: transform 0.45s ease;
+}
+
+.card-emoji {
+    font-size: 56px;
+    margin: 8px 0;
+    text-align: center;
+}
+
+.card-categoria {
+    align-self: flex-start;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+}
+
+.card h3 {
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.card-preco {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 4px 0 12px;
+}
+
+.botao-principal {
+    background: #17453f;
+    border: none;
+    border-radius: 6px;
+    color: #ffffff;
+    margin-top: auto;
+    padding: 10px;
+}
+
+.botao-principal:hover {
+    background: #0f332e;
+}
+
+.botao-secundario {
+    background: #ffffff;
+    border: 1px solid #17453f;
+    border-radius: 6px;
+    color: #17453f;
+    padding: 6px 12px;
+}
+
+.botao-secundario:hover {
+    background: #e7f0ee;
+}
+
+.carrinho {
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 48px);
+    padding: 16px;
+    position: sticky;
+    top: 24px;
+}
+
+.itens-carrinho {
+    flex: 1;
+    list-style: none;
+    margin: 12px 0;
+    overflow-y: auto;
+}
+
+.itens-carrinho .vazio {
+    color: #66716e;
+    padding: 12px 0;
+}
+
+.item-carrinho {
+    border-bottom: 1px solid #ece7dc;
+    padding: 10px 0;
+}
+
+.item-nome {
+    font-weight: 600;
+}
+
+.item-controles {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.item-controles button {
+    background: #f4f1ea;
+    border: 1px solid #ddd6c8;
+    border-radius: 4px;
+    height: 28px;
+    min-width: 28px;
+}
+
+.item-controles .remover {
+    margin-left: auto;
+    padding: 0 8px;
+}
+
+.total-carrinho {
+    border-top: 2px solid #17453f;
+    display: flex;
+    font-size: 18px;
+    justify-content: space-between;
+    padding-top: 12px;
+}
+
+.aviso {
+    background: #23302d;
+    border-radius: 6px;
+    bottom: 24px;
+    color: #ffffff;
+    left: 50%;
+    max-width: calc(100vw - 32px);
+    opacity: 0;
+    padding: 10px 16px;
+    pointer-events: none;
+    position: fixed;
+    transform: translateX(-50%);
+    transition: opacity 0.2s;
+}
+
+.aviso.visivel {
+    opacity: 1;
+}
+
+@media (max-width: 800px) {
+    .topo {
+        padding: 20px 16px;
+    }
+
+    .pagina {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 16px;
+    }
+
+    .vitrine {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .carrinho {
+        max-height: none;
+        position: static;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card.movendo {
+        transition: none;
+    }
+}
