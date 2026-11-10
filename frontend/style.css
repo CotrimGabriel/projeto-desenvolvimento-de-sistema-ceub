@@ -11,19 +11,96 @@ body {
     line-height: 1.4;
 }
 
-button {
-    cursor: pointer;
+button,
+input {
     font: inherit;
 }
 
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+[hidden] {
+    display: none !important;
+}
+
 .topo {
+    align-items: center;
     background: #17453f;
     color: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    justify-content: space-between;
     padding: 24px 32px;
 }
 
 .topo h1 {
     font-size: 28px;
+}
+
+.link-topo {
+    border: 1px solid #ffffff;
+    border-radius: 6px;
+    color: #ffffff;
+    padding: 8px 14px;
+    text-decoration: none;
+}
+
+.link-topo:hover {
+    background: #ffffff;
+    color: #17453f;
+}
+
+.pagina-admin {
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 32px 24px;
+}
+
+.caixa-login {
+    background: #ffffff;
+    border: 1px solid #ddd6c8;
+    border-radius: 8px;
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 24px;
+}
+
+.caixa-login h2 {
+    margin-bottom: 16px;
+}
+
+.caixa-login form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.caixa-login label {
+    font-weight: 600;
+}
+
+.caixa-login input {
+    border: 1px solid #b9b1a2;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.caixa-login input:focus {
+    border-color: #17453f;
+    outline: 2px solid #17453f;
+    outline-offset: 1px;
+}
+
+.erro-login {
+    color: #b42318;
+    min-height: 22px;
 }
 
 .pagina {

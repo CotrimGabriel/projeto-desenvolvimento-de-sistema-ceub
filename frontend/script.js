@@ -13,6 +13,7 @@ const cards = new Map();
 
 let carrinho = lerCarrinho();
 let ultimaAtualizacao = 0;
+let cliquesPendentes = 0;
 let temporizadorAviso;
 
 window.dataLayer = window.dataLayer || [];
@@ -168,20 +169,21 @@ async function registrarClique(produto, acao) {
         categoria: produto.categoria,
     });
 
-    const numero = ++ultimaAtualizacao;
+    cliquesPendentes += 1;
     try {
-        const prioridades = await requisitar("/api/eventos/clique", {
+        await requisitar("/api/eventos/clique", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ produto_id: produto.id }),
         });
-        const produtos = await requisitar("/api/produtos");
-        if (numero === ultimaAtualizacao) {
-            mostrarProdutos(produtos);
-            mostrarPrioridades(prioridades);
-        }
     } catch (erro) {
         mostrarAviso(erro.message);
+    } finally {
+        cliquesPendentes -= 1;
+    }
+
+    if (cliquesPendentes === 0) {
+        await carregarTela();
     }
 }
 

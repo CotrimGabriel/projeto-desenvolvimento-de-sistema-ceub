@@ -21,6 +21,9 @@ services:
     environment:
       DATABASE_URL: postgresql+psycopg2://loja:loja123@db:5432/loja
       PYTHONDONTWRITEBYTECODE: "1"
+      JWT_SEGREDO: troque-este-segredo-em-producao
+      ADMIN_USUARIO: admin
+      ADMIN_SENHA: admin123
     volumes:
       - ./backend:/app/backend
       - ./frontend:/app/frontend
@@ -29,7 +32,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    command: sh -c "pip install --quiet --no-cache-dir fastapi==0.115.0 uvicorn==0.30.6 sqlalchemy==2.0.35 psycopg2-binary==2.9.9 && uvicorn app:app --host 0.0.0.0 --port 8000"
+    command: sh -c "pip install --quiet --no-cache-dir fastapi==0.115.0 uvicorn==0.30.6 sqlalchemy==2.0.35 psycopg2-binary==2.9.9 bcrypt==4.2.0 pyjwt==2.9.0 python-multipart==0.0.12 && uvicorn app:app --host 0.0.0.0 --port 8000"
 
 volumes:
   dados_banco:

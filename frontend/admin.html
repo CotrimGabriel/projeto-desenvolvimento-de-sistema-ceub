@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do administrador - Loja Tag</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topo">
+        <div>
+            <h1>Loja Tag</h1>
+            <p>Área do administrador</p>
+        </div>
+        <a class="link-topo" href="index.html">Voltar para a loja</a>
+    </header>
+
+    <main class="pagina-admin">
+        <section id="tela-login" class="caixa-login" aria-labelledby="titulo-login">
+            <h2 id="titulo-login">Entrar</h2>
+            <form id="formulario-login" novalidate>
+                <label for="campo-usuario">Usuário</label>
+                <input id="campo-usuario" name="usuario" type="text" autocomplete="username" required>
+
+                <label for="campo-senha">Senha</label>
+                <input id="campo-senha" name="senha" type="password" autocomplete="current-password" required>
+
+                <p id="erro-login" class="erro-login" role="alert"></p>
+
+                <button id="botao-entrar" class="botao-principal" type="submit">Entrar</button>
+            </form>
+        </section>
+
+        <section id="painel-admin" class="painel" aria-labelledby="titulo-painel" hidden>
+            <div class="painel-cabecalho">
+                <h2 id="titulo-painel">Olá, <span id="nome-administrador"></span></h2>
+                <button id="botao-sair" class="botao-secundario" type="button">Sair</button>
+            </div>
+            <p>Você está logado como administrador.</p>
+        </section>
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+</html>
