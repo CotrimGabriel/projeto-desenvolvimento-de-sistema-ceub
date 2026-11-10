@@ -11,9 +11,25 @@ Protótipo de e-commerce do Projeto Final da disciplina de Desenvolvimento de Si
 
 O carrinho fica salvo no navegador (`localStorage`). A lista de prioridades fica salva no banco de dados.
 
+## Área do administrador
+
+O cliente compra sem login. O administrador entra pela página pelo link "Área do administrador" no topo da loja.
+
+1. O usuário e a senha são enviados para `POST /api/auth/login`.
+2. O backend compara a senha com o hash bcrypt salvo no banco. A senha nunca é guardada em texto puro.
+3. Se estiver correta, o backend devolve um token JWT válido por 2 horas.
+4. O navegador guarda o token no `sessionStorage` e o envia no cabeçalho `Authorization: Bearer` das rotas protegidas.
+5. "Sair" apaga o token do navegador.
+
+Usuário e senha incorretos recebem a mesma mensagem, para não revelar quais usuários existem.
+
+
+O administrador inicial é criado na primeira execução, a partir das variáveis `ADMIN_USUARIO` e `ADMIN_SENHA`. O token é assinado com `JWT_SEGREDO`. 
+
 ## Tecnologias
 
 - **Backend:** Python, FastAPI e SQLAlchemy
+- **Autenticação:** bcrypt para as senhas e JWT para a sessão
 - **Frontend:** HTML, CSS e JavaScript
 - **Banco de dados:** PostgreSQL
 - **Infraestrutura:** Docker e Docker Compose
@@ -25,6 +41,8 @@ projeto-desenvolvimento-de-sistema-ceub/
 ├── backend/
 │   └── app.py
 ├── frontend/
+│   ├── admin.html
+│   ├── admin.js
 │   ├── index.html
 │   ├── script.js
 │   └── style.css
@@ -43,6 +61,7 @@ docker compose up
 Quando o terminal mostrar `Uvicorn running`, acesse:
 
 - **Loja:** <http://localhost:8000>
+- **Área do administrador:** <http://localhost:8000/admin.html>
 - **Swagger:** <http://localhost:8000/docs>
 
 ## Como testar o taggeamento
@@ -54,14 +73,26 @@ Quando o terminal mostrar `Uvicorn running`, acesse:
 5. Clique em "Limpar minhas tags". A vitrine volta à ordem inicial.
 6. No console do navegador, digite `window.dataLayer` para ver os eventos enviados.
 
+## Como testar o login
+
+1. Clique em "Área do administrador" no topo da loja.
+2. Entre com uma senha errada. A tela mostra "Usuário ou senha inválidos".
+3. Entre com `admin` e `admin123`. O painel mostra o administrador logado.
+4. Recarregue a página. A sessão continua ativa.
+5. Clique em "Sair". A tela volta para o login.
+
+No Swagger, clique em **Authorize**, informe o usuário e a senha, e teste a rota protegida `GET /api/auth/me`.
+
 ## Rotas da API
 
-| Método | Rota | Descrição |
-| --- | --- | --- |
-| `GET` | `/api/produtos` | Lista os produtos pela prioridade do visitante |
-| `POST` | `/api/eventos/clique` | Registra o clique em um produto |
-| `GET` | `/api/tags` | Mostra a lista de prioridades do visitante |
-| `DELETE` | `/api/tags` | Apaga a lista de prioridades do visitante |
+| Método | Rota | Acesso | Descrição |
+| --- | --- | --- | --- |
+| `GET` | `/api/produtos` | Público | Lista os produtos pela prioridade do visitante |
+| `POST` | `/api/eventos/clique` | Público | Registra o clique em um produto |
+| `GET` | `/api/tags` | Público | Mostra a lista de prioridades do visitante |
+| `DELETE` | `/api/tags` | Público | Apaga a lista de prioridades do visitante |
+| `POST` | `/api/auth/login` | Público | Faz o login e devolve o token JWT |
+| `GET` | `/api/auth/me` | Administrador | Mostra o administrador logado |
 
 ## Como parar
 
